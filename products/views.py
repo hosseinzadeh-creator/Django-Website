@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect #added HttpResponeRedirect 
+from django.urls import reverse #imported for use name of url path
 
 # Create your views here.
 
@@ -36,7 +37,9 @@ def chocolateCat_number_view(request,chocolates):
     if chocolates>len(chocolateCatList):
         return HttpResponseNotFound('<h1>Error 404: page is not found </h1>')
     redirectData=chocolateCatList[chocolates-1]
-    return HttpResponseRedirect(f'/products/chocolate/{redirectData}')
+    urlPath=reverse('chocolateCat_Name', args=[redirectData])
+    return HttpResponseRedirect(urlPath)
+    #return HttpResponseRedirect(f'/products/chocolate/{redirectData}')
 
 def chocolateCat_view(request,chocolates):
     chocolateData=chocolateDict.get(chocolates)
