@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect #added HttpResponeRedirect 
 from django.urls import reverse #imported for use name of url path
 
+
 # Create your views here.
 
 chocolateDict={
@@ -19,7 +20,25 @@ def index_view(request):
     return HttpResponse('<h1>main producat page</h1>')
 
 def choclate_view(request):
-    return HttpResponse('<h1>choclate page</h1>')
+
+    chocolateProducts=list(chocolateDict.keys())
+    chocolateItems=""
+    for item in chocolateProducts:
+      chocolate_urlPath=reverse('chocolateCat_Name', args=[item]) #should be use the name of chocolateCat_view
+      chocolateItems+=f'<li><a href="{chocolate_urlPath}"> {item} </a></li>\n'
+    content=f'<ul> {chocolateItems} </ul>'
+   #This pattern is used for a limited number of items.
+    # content="""
+    #         <ul>
+    #           <li><a href="#">white-chocolate</a></li>
+    #           <li><a href="#">milk-chocolate</a></li>
+    #           <li><a href="#">dark-chocolate</a></li>
+    #           <li><a href="#">colored-white</a></li>
+    #           <li><a href="#">flavored-chocolate-wafers</a></li>
+    #        </ul>  
+    # """
+
+    return HttpResponse(content)
 
 def baking_view(request):
     return HttpResponse('<h1>baking ingredients page</h1>')
@@ -37,7 +56,7 @@ def chocolateCat_number_view(request,chocolates):
     if chocolates>len(chocolateCatList):
         return HttpResponseNotFound('<h1>Error 404: page is not found </h1>')
     redirectData=chocolateCatList[chocolates-1]
-    urlPath=reverse('chocolateCat_Name', args=[redirectData])
+    urlPath=reverse('chocolateCat_Name', args=[redirectData]) #dynamic path
     return HttpResponseRedirect(urlPath)
     #return HttpResponseRedirect(f'/products/chocolate/{redirectData}')
 
