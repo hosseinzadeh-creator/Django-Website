@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseNotFound
+from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect #added HttpResponeRedirect 
 
 # Create your views here.
 
@@ -28,6 +28,15 @@ def decorating_view(request):
 
 def pastry_view(request):
     return HttpResponse('<h1>pastry necessities page</h1>')
+
+#sub category page for chocolate product
+# created redirect data
+def chocolateCat_number_view(request,chocolates):
+    chocolateCatList=list(chocolateDict.keys())
+    if chocolates>len(chocolateCatList):
+        return HttpResponseNotFound('<h1>Error 404: page is not found </h1>')
+    redirectData=chocolateCatList[chocolates-1]
+    return HttpResponseRedirect(f'/products/chocolate/{redirectData}')
 
 def chocolateCat_view(request,chocolates):
     chocolateData=chocolateDict.get(chocolates)
