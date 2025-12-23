@@ -1,0 +1,21 @@
+<html lang="en">
+    <head>
+    <meta charset="TUF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width initial-scale=1.0 ">
+    <link rel="icon" href="">
+    <link rel="canonical" href="">
+    <title>Chocolate </title>
+    </head>
+    <body>
+        <div>
+            <h1>Chocolate List </h1> 
+            <ul> 
+                {%for item in chocolateList%}
+                    <li><a href="/products/chocolate/{{item}}">{{item | title }}</a></li>
+                {% endfor %}
+
+            </ul>{% comment %} Simultaneous use of tags and variables in HTML codes using the DTL method {% endcomment %}
+        </div>    
+    </body>
+</html>        

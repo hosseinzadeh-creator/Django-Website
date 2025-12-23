@@ -9,8 +9,8 @@
     </head>
     <body>
         <div>
-            <h1>Product name is {{chocolateName}}</h1>
-            <p>{{chocolateDesc}}</p>
+             <h1>Product name is {{ chocolateName|title }}</h1> {% comment %}Variable and Django Template filter {% endcomment %}
+            <p>{{ chocolateDesc }}</p> {% comment %} use variable in Html {% endcomment %}
         </div>    
     </body>
 </html>        
