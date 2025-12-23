@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render #Use the render command to display Html pages
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect #added HttpResponeRedirect 
 from django.urls import reverse #imported for use name of url path
-from django.template.loader import render_to_string #imported for use template file
+#from django.template.loader import render_to_string #imported for use template file
 
 
 # Create your views here.
@@ -14,12 +14,10 @@ chocolateDict={
     'flavored-chocolate-wafers':'Our Sweet Shoppe Cream Cheese Melting Wafers add a rich & creamy cream cheese flavor to your treats! Designed to capture the taste of real cream cheese frosting, these wafers provide a rich, creamy flavor & soft finish. Please note these wafers are softer to the touch when compared to our standard formula & may take a bit longer to set, giving you time to perfect your dips, drizzles & molds.',
 }
 
-
-
-
 def index_view(request):
-    renderData=render_to_string("products/index.html") #address of html file
-    return HttpResponse(renderData)
+    return render(request,"products/index.html") #Use the render command to display Html pages 
+    # renderData=render_to_string("products/index.html") #address of html file
+    # return HttpResponse(renderData)
     #return HttpResponse('<h1>main producat page</h1>')
 
 def choclate_view(request):
@@ -66,5 +64,10 @@ def chocolateCat_number_view(request,chocolates):
 def chocolateCat_view(request,chocolates):
     chocolateData=chocolateDict.get(chocolates)
     if chocolateData is not None:
-        return HttpResponse(f'<h1> {chocolates}</h1>\n <p>{chocolateData}</p>')
+        context={
+            'chocolateName':chocolates,
+            'chocolateDesc':chocolateData
+        }#use DTL(Django Template Language) 
+        return render(request,'products/chocolatecat.html',context) #Using the render command to display pages with the DTL method 
+        #return HttpResponse(f'<h1> {chocolates}</h1>\n <p>{chocolateData}</p>')
     return HttpResponseNotFound('<h1>Error 404: page is not found </h1>')
