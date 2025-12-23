@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect #added HttpResponeRedirect 
 from django.urls import reverse #imported for use name of url path
+from django.template.loader import render_to_string #imported for use template file
 
 
 # Create your views here.
@@ -17,7 +18,9 @@ chocolateDict={
 
 
 def index_view(request):
-    return HttpResponse('<h1>main producat page</h1>')
+    renderData=render_to_string("products/index.html") #address of html file
+    return HttpResponse(renderData)
+    #return HttpResponse('<h1>main producat page</h1>')
 
 def choclate_view(request):
 
