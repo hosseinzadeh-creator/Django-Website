@@ -9,8 +9,15 @@
     </head>
     <body>
         <div>
-             <h1>Product name is {{ chocolateName|title }}</h1> {% comment %}Variable and Django Template filter {% endcomment %}
-            <p>{{ chocolateDesc }}</p> {% comment %} use variable in Html {% endcomment %}
+            {% if chocolateDesc is not None %} {% comment %} use IF Template Tag in Html {% endcomment %}
+              <h1>Product name is {{ chocolateName|title }}</h1> {% comment %}Variable and Django Template filter {% endcomment %}
+              <p>{{ chocolateDesc }}</p> {% comment %} use variable in Html {% endcomment %}
+            {% else %}
+               <h1>Product name is {{ chocolateName|title }}
+               <p style="font-size:16px;">Unfortunately,{{ chocolateName|title }} is currently not available for sale on the site. </p>
+            {% endif %}
+           {% comment %} <h1>Product name is {{ chocolateName|title }}</h1> Variable and Django Template filter {% endcomment %}
+           {% comment %} <p>{{ chocolateDesc }}</p>  use variable in Html {% endcomment %}
         </div>    
     </body>
 </html>        
