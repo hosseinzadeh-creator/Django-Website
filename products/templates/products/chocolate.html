@@ -12,10 +12,10 @@
             <h1>Chocolate List </h1> 
             <ul> 
                 {%for item in chocolateList%}
-                    <li><a href="/products/chocolate/{{item}}">{{item | title }}</a></li>
+                    <li><a href="{% url 'chocolateCat_Name' chocolates=item %}">{{item | title }}</a></li>
                 {% endfor %}
 
-            </ul>{% comment %} Simultaneous use of tags and variables in HTML codes using the DTL method {% endcomment %}
+            </ul>{% comment %} Using the URL Template tag in HTML codes to create dynamic links {% endcomment %}
         </div>    
     </body>
 </html>        
